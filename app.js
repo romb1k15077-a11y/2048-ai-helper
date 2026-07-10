@@ -38,7 +38,11 @@ analyze.addEventListener("click", () => {
     ctx.drawImage(img, 0, 0);
 
     move.innerHTML = "🧠 Аналіз...";
+    recognizeBoard(canvas).then(text => {
 
+    move.innerHTML = text;
+
+});
     console.log("Зображення готове до аналізу.");
 
 });
