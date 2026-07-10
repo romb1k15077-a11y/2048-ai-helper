@@ -40,6 +40,14 @@ analyze.addEventListener("click", () => {
     move.innerHTML = "🧠 Аналіз...";
     recognizeBoard(canvas).then(text => {
 
+    const bestMove = getBestMove(text);
+
+    move.innerHTML = bestMove;
+
+    console.log(text);
+
+});
+
     move.innerHTML = text;
 
 });
