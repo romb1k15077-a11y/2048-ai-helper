@@ -3,37 +3,42 @@ const preview = document.getElementById("preview");
 const move = document.getElementById("move");
 const analyze = document.getElementById("analyze");
 
-let selectedImage = null;
+let img = new Image();
 
 imageInput.addEventListener("change", (e) => {
 
-    selectedImage = e.target.files[0];
+    const file = e.target.files[0];
 
-    if (!selectedImage) return;
+    if (!file) return;
 
-    const img = document.createElement("img");
-
-    img.src = URL.createObjectURL(selectedImage);
-
-    img.style.width = "100%";
-    img.style.marginTop = "20px";
-    img.style.borderRadius = "15px";
+    img.src = URL.createObjectURL(file);
 
     preview.innerHTML = "";
+
+    img.style.width = "100%";
+    img.style.borderRadius = "12px";
+
     preview.appendChild(img);
 
 });
 
 analyze.addEventListener("click", () => {
 
-    if (!selectedImage) {
-
-        alert("Спочатку вибери скриншот");
-
+    if (!img.src) {
+        alert("Оберіть скриншот.");
         return;
-
     }
 
-    move.innerHTML = "⬅️";
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+
+    ctx.drawImage(img, 0, 0);
+
+    move.innerHTML = "🧠 Аналіз...";
+
+    console.log("Зображення готове до аналізу.");
 
 });
